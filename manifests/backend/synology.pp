@@ -44,6 +44,9 @@
 # [*synology_pool_name*]
 #   (Required) Volume on Synology storage to be used for creating lun.
 #
+# [*synology_ssl_verify*]
+#   (Optional) Whether to validate certificate or not.
+#
 # [*manage_volume_type*]
 #   (Optional) Whether or not manage Cinder Volume type.
 #   If set to true, a Cinde Volume type will be created
@@ -68,6 +71,7 @@ define cinder::backend::synology (
   $synology_username   = 'admin',
   $synology_password   = undef,
   $synology_pool_name  = undef,
+  $synology_ssl_verify = undef,
   $manage_volume_type  = false,
   $extra_options       = {},
 ) {
@@ -87,6 +91,7 @@ define cinder::backend::synology (
     "${name}/synology_username":    value => $synology_username;
     "${name}/synology_password":    value => $synology_password;
     "${name}/synology_pool_name":   value => $synology_pool_name;
+    "${name}/synology_ssl_verify":  value => $synology_ssl_verify;
   }
 
   if $manage_volume_type {
